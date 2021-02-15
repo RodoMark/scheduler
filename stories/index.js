@@ -22,3 +22,8 @@ storiesOf("Button", module)
       Disabled
     </Button>
   ));
+
+  export default {
+    title: 'Button',
+    argTypes: { onClick: { action: 'clicked' } },
+  };

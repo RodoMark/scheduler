@@ -71,6 +71,9 @@ storiesOf("Button", module)
     ));
 
     // Interviewers
+
+    import InterviewerListItem from 'components/InterviewerListItem';
+
     const interviewer = {
       id: 1,
       name: "Sylvia Palmer",

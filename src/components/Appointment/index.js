@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function(props) {
+import './styles.scss'
+
+export default function Appointment(props) {
   return (
     <article className ="appointment"></article>
   )
 }
+

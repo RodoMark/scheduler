@@ -137,7 +137,7 @@ storiesOf("Button", module)
       <InterviewerList
         interviewers={interviewers}
         interviewer={3}
-        setInterviewer={action("setInterviewer")}
+        setInterviewer={event => action("setInterviewer")(3)}
       />
     ));
 
@@ -148,6 +148,7 @@ storiesOf("Button", module)
   import Confirm from 'components/Appointment/Confirm'
   import Status from 'components/Appointment/Status'
   import Error from 'components/Appointment/Error'
+  import Form from 'components/Appointment/Form'
 
 
   storiesOf('Appointment', module)
@@ -177,6 +178,24 @@ storiesOf("Button", module)
             message="Could not delete appointment"
             onClose={event => action("onClose")("Error closed")}
         />)
+        .add("Form Edit", () =>
+          <Form 
+            name={""}
+            interviewers={interviewers}
+            interviewer={3}
+            setInterviewer={event => action("setInterviewer")(props.interviewer)}
+            onSave={event => action('onSave')('Saving appointment')}
+            onCancel={event => action('onCancel')('Cancelling operation')}
+          />)
+          .add("Form Create", () =>
+          <Form 
+            name={""}
+            interviewers={interviewers}
+            interviewer={3}
+            setInterviewer={event => action("setInterviewer")(props.interviewer)}
+          />)
+        
+        
 
       
 

@@ -7,76 +7,58 @@ import Appointment from "./Appointment/index.js"
 import { getAppointmentsForDay } from "../helpers/selectors.js"
 
 
-
-
-
 export default function Application(props) {
 
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: [
-      {
-        id: 1,
-        time: "12pm",
-      },
-      {
-        id: 2,
-        time: "1pm",
-        interview: {
-          student: "Lydia Miller-Jones",
-          interviewer: {
-            id: 1,
-            name: "Sylvia Palmer",
-            avatar: "https://i.imgur.com/LpaY82x.png",
-          }
-        }
-      },
-      {
-        id: 3,
-        time: "2pm",
-        interview: {
-          student: "Jude Mekitbad",
-          interviewer: {
-            id: 4,
-            name: "Cohana Roy",
-            avatar: "https://i.imgur.com/FK8V841.jpg",
-          }
-        }
-      },
-      {
-        id: 4,
-        time: "3pm",
-      },
-      {
-        id: 5,
-        time: "4pm",
-        interview: {
-          student: "Sabrina Spellman",
-          interviewer: {
-            id: 2,
-            name: "Tori Malcolm",
-            avatar: "https://i.imgur.com/Nmx0Qxo.png",
-          }
-        }
-      },
-    ]
+    appointments: {
+    }
   });
 
+  const dailyAppointments = getAppointmentsForDay(state, state.day) 
+
   const setDay = day => {setState({...state, day: day})}
-  const setDays = days => {setState({...state, days: days})}
+  
+  const getDays = 
+  axios.get('/api/days')
+    .then((output) => {
+      return output.data
+    }).catch((error) => {
+      console.log("ERROR:", error)
+    })
+
+  const getAppointments = 
+  axios.get('/api/appointments')
+    .then((output) => {
+      return output.data
+    })
+    .catch((error) => {
+      console.log("ERROR:", error)
+    })
 
   useEffect(() => {
-    axios.get('/api/days')
-      .then ((output)=> {
-        setDays([...output.data]);
+    Promise.all([
+      getDays, 
+      getAppointments])
+      .then(output => {
+        const days = output[0]
+        const apps = output[1]
+        
+        setState({
+          ...state, days: days, appointments: apps
+        })
+
       })
+      .catch((error) => {
+        console.log("ERROR:", error)
+      })
+    
   }, [])
 
-  const parsedAppointments = getAppointmentsForDay(state, state.day).map(app => {
+  const parsedAppointments = dailyAppointments.map(app => {
     return(
     <Appointment
-      
       key={app.id}
       {...app} 
     />

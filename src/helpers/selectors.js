@@ -19,5 +19,19 @@ export function getAppointmentsForDay(state, day) {
 }
 
 export function getInterview(state, interview) {
-  
+  if(!interview) return null
+  // Get the ID of the interviewer for interview
+  // Go into interviewers and pull up obj with that ID
+
+  const student = interview.student
+  const intID = interview.interviewer
+
+  const interviewer = state.interviewers[intID]
+
+  if(interviewer){
+    return {
+      student,
+      interviewer,
+    }  
+  }
 }

@@ -1,8 +1,6 @@
 export function getAppointmentsForDay(state, day) {
 
-  // Inside state, find the ID of day (e.g 1: 'Monday')
-  // Using the ID find the array of appointments
-  // Using the ID's in the array, fetch appointmentObjects for each index
+//... returns an array of appointments for that day
 
   const days = state.days
   const appointments = state.appointments
@@ -16,15 +14,6 @@ export function getAppointmentsForDay(state, day) {
        )        
      }
   }
-
   
-  
-
-
-
-  
-
-  
-  //... returns an array of appointments for that day
   return []
 }

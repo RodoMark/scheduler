@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
+
+import { getInterviewersForDay } from "helpers/selectors"
 
 import { useVisualMode } from "hooks/useVisualMode"
 
 import Header from 'components/Appointment/Header'
 import Empty from 'components/Appointment/Empty'
 import Show from 'components/Appointment/Show'
+import Form from 'components/Appointment/Form'
 
 import './styles.scss'
 
@@ -21,7 +24,11 @@ export default function Appointment(props) {
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {mode === EMPTY && <Empty onAdd={transition("CREATE") } />}
+
+      {mode === EMPTY && 
+      <Empty onAdd={() => transition('CREATE')}
+        />}
+
       {mode === SHOW && (
       <Show
         student={props.interview.student}
@@ -30,10 +37,13 @@ export default function Appointment(props) {
       
     )}
 
-{mode === CREATE && (
+      {mode === CREATE && (
       <Form
-        student={props.interview.student}
-        interviewer={props.interview.interviewer.name}
+        interviewers={props.interviewers}
+        interviewer={props.interviewer} 
+        setInterviewer={props.setInterviewerVal}
+        onChange={props.onChange}
+        onCancel={()=> back()}
       />
       
     )}

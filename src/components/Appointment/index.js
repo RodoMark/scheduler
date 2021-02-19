@@ -9,6 +9,7 @@ import Empty from 'components/Appointment/Empty'
 import Show from 'components/Appointment/Show'
 import Form from 'components/Appointment/Form'
 import Status from 'components/Appointment/Status'
+import Error from 'components/Appointment/Error'
 
 import './styles.scss'
 
@@ -19,6 +20,8 @@ export default function Appointment(props) {
   const EDIT = "EDIT";
   const SAVING = "SAVING";
   const DELETING = "DELETING";
+  const ERROR_SAVE = "ERROR_SAVE"
+  const ERROR_DELETE = "ERROR_DELETE"
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -34,6 +37,7 @@ export default function Appointment(props) {
     transition(SAVING)
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
+      .catch((error) => transition (ERROR_SAVE, true))
   }
 
   function edit(name, interviewer) {
@@ -56,6 +60,7 @@ export default function Appointment(props) {
     transition(DELETING)
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))
+      .catch((error) => transition(ERROR_DELETE, true))
   }
  
   return (
@@ -107,6 +112,22 @@ export default function Appointment(props) {
     {mode === DELETING && (
       <Status
         message="DELETING"
+      />
+      
+    )} 
+
+    {mode === ERROR_SAVE && (
+      <Error
+        message="ERROR WHILE SAVING"
+        onClose={back}
+      />
+      
+    )} 
+
+    {mode === ERROR_DELETE && (
+      <Error
+        message="ERROR WHILE DELETING"
+        onClose={back}
       />
       
     )} 

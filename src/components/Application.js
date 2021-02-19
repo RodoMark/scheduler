@@ -94,6 +94,28 @@ export default function Application(props) {
     return axios.put(`/api/appointments/${id}`, {interview})
   }
 
+  function editInterview(id, interview) {
+    // console.log(id, interview)
+    // console.log("HERE IS BOOK")
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+ 
+    setState({
+      ...state,
+      appointments
+    });
+    
+    return axios.put(`/api/appointments/${id}`, {interview})
+  }
+
   function cancelInterview(id) 
   {
     const appointment = {
@@ -131,6 +153,7 @@ const schedule = appointments.map((appointment) => {
       interview={interview}
       interviewers={interviewers}
       bookInterview={bookInterview}
+      editInterview={editInterview}
       cancelInterview={cancelInterview}
     />
   );

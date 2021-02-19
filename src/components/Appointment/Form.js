@@ -51,7 +51,7 @@ export default function Form(props) {
       </Button>
       <Button 
         confirm
-        onClick={props.onSave}>
+        onClick={()=> props.onSave(name, interviewer)}>
           Save
       </Button>
     </section>

@@ -55,3 +55,20 @@ export function getInterviewersForDay(state, day) {
     
     return []
   }
+
+export function getSpotsByName(state, day) {
+  
+  const days = state.days
+
+  for(const dayObj of days) {
+    if(dayObj.name === day) {
+      console.log(dayObj.id)
+      return dayObj.spots
+  }
+ }
+  
+  // fr (const [key, dayObj] in daysMap){
+  //   console.log("DAY OBJ", dayObj)
+  //   if(dayObj.name === day) return dayObj
+  // }
+}

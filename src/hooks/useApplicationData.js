@@ -1,17 +1,9 @@
-import {useState, useReducer, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
-
-import { getSpotsByName, getAppointmentsForDay } from '../helpers/selectors'
-
-const ACTIONS = {
-  SET_DAY: "SET_DAY",
-  SET_APPLICATION_DATA: "SET_APPLICATION_DATA",
-  SET_INTERVIEW: "SET_INTERVIEW",
-}
 
 export function useApplicationData(){
 
-  const state = {
+  const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {
@@ -19,40 +11,12 @@ export function useApplicationData(){
     interviewers: {
     
     },
-  }
-
-  function reducer(state, action) {
-    if(action === ACTIONS.SET_DAY) {
-      return { ...state, day: day }
-    }
-
-    if(action === ACTIONS.SET_APPLICATION_DATA) {
-      return {...state,}
-    }
-
-    if(action === ACTIONS.SET_INTERVIEW) {
-      return { ...state, appointments}
-    }
-  
-  }
-
-  // const [state, setState] = useState({
-  //   day: "Monday",
-  //   days: [],
-  //   appointments: {
-  //   },
-  //   interviewers: {
-    
-  //   },
    
-  // });
+  });
 
   const setDay = day => {setState({...state, day: day})}
 
-  
- 
-  
-  
+
 
 
   const getDays = 
@@ -91,14 +55,14 @@ export function useApplicationData(){
         const days = output[0]
         const apps = output[1]
         const interviewers = output[2]
-        
-        useReducer({
+
+        setState({
           ...state, 
           days: days, 
           appointments: apps, 
           interviewers: interviewers,
-        }, ACTIONS.SET_APPLICATION_DATA)
-
+        })
+        
       })
       .catch((error) => {
         console.log("ERROR:", error)

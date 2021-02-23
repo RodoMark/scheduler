@@ -8,6 +8,7 @@ import Header from 'components/Appointment/Header'
 import Empty from 'components/Appointment/Empty'
 import Show from 'components/Appointment/Show'
 import Form from 'components/Appointment/Form'
+import Confirm from 'components/Appointment/Confirm'
 import Status from 'components/Appointment/Status'
 import Error from 'components/Appointment/Error'
 
@@ -19,6 +20,7 @@ export default function Appointment(props) {
   const CREATE = "CREATE";
   const EDIT = "EDIT";
   const SAVING = "SAVING";
+  const CONFIRM = "CONFIRM"
   const DELETING = "DELETING";
   const ERROR_SAVE = "ERROR_SAVE"
   const ERROR_DELETE = "ERROR_DELETE"
@@ -55,12 +57,15 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-
     // transition to saving
     transition(DELETING)
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch((error) => transition(ERROR_DELETE, true))
+  }
+
+  function confirm() {
+    transition(CONFIRM)
   }
  
   return (
@@ -76,7 +81,7 @@ export default function Appointment(props) {
       <Show
         student={props.interview.student}
         interviewer={props.interview.interviewer.name}
-        onDelete={cancel}
+        onDelete={confirm}
         onEdit={edit}
       />
       
@@ -108,6 +113,15 @@ export default function Appointment(props) {
       />
       
     )} 
+
+    {mode === CONFIRM && (
+          <Confirm
+            message="Are you sure you would like to delete?"
+            onConfirm={cancel}
+            onDeny={back}
+          />
+          
+        )} 
 
     {mode === DELETING && (
       <Status

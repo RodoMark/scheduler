@@ -87,30 +87,30 @@ describe("Application", () => {
       target: { value: "Lydia Miller-Jones" }
       });
 
-      fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
-
-      fireEvent.click(getByText(appointment, "Save"));
-      // expect(getByText(appointment, 'SAVING')).toBeInTheDocument();
-  
-      // await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
-  
-
-    console.log(prettyDOM(appointment))
+    fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
 
     // fireEvent.click(getByText(appointment, "Save"));
+    // expect(getByText(appointment, 'SAVING')).toBeInTheDocument();
 
-    // expect(getByText(appointment, "SAVING")).toBeInTheDocument();
+    // await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
+  
 
-    // const day = getAllByTestId(container, "day").find(day =>
-    //   queryByText(day, "Monday")
-    // );
+    // console.log(prettyDOM(appointment))
 
-    // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  // fireEvent.click(getByText(appointment, "Save"));
+
+  // expect(getByText(appointment, "SAVING")).toBeInTheDocument();
+
+  // const day = getAllByTestId(container, "day").find(day =>
+  //   queryByText(day, "Monday")
+  // );
+
+  // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
 
 
   })
 
-  it.only("shows the save error when failing to save an appointment", async () => {
+  it("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
 
     const { container, debug } = render(<Application />);

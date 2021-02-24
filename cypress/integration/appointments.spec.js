@@ -23,7 +23,7 @@ describe("should book an interview", () => {
       cy.contains(".appointment__card--show", "Sylvia Palmer");
   });
 
-  it.only("should edit an interview", () => {
+  it("should edit an interview", () => {
     cy.contains('Archie Cohen')
       .get("[alt=Edit]")
       .click( { force: true } );
@@ -43,6 +43,21 @@ describe("should book an interview", () => {
   });
 
   it("should cancel an interview", () => {
-    
+    cy.get("[alt=Delete]")
+    .click({ force: true });
+
+  cy.contains("Confirm")
+    .click();
+
+    cy.contains("DELETING").should("exist");
+
+    cy.contains("DELETING").should("not.exist");
+
+    cy.contains(".appointment__card--show", "Archie Cohen")
+    .should("not.exist");
+
+  
+      
+
   });
 })

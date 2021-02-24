@@ -20,6 +20,8 @@ export default function Form(props) {
   }
 
   function validate() {
+    // prevents blank form submissions
+    
     if (name === "") {
       setError("Student name cannot be blank");
       return;

@@ -35,7 +35,6 @@ export default function Appointment(props) {
       interviewer
     };
 
-    // transition to saving
     transition(SAVING)
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
@@ -48,7 +47,6 @@ export default function Appointment(props) {
       interviewer
     };
 
-    // transition to show
     transition(EDIT, false)
   }
 
@@ -57,7 +55,7 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    // transition to saving
+    
     transition(DELETING)
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))

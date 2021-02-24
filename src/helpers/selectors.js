@@ -1,5 +1,4 @@
 export function getAppointmentsForDay(state, day) {
-
 //... returns an array of appointments for that day
 
   const days = state.days
@@ -20,8 +19,6 @@ export function getAppointmentsForDay(state, day) {
 
 export function getInterview(state, interview) {
   if(!interview) return null
-  // Get the ID of the interviewer for interview
-  // Go into interviewers and pull up obj with that ID
 
   const student = interview.student
   const intID = interview.interviewer
@@ -37,9 +34,7 @@ export function getInterview(state, interview) {
 }
 
 export function getInterviewersForDay(state, day) {
-
   //... returns an array of interviews for that day
-  
     const days = state.days
     const interviewers = state.interviewers
   
@@ -57,6 +52,7 @@ export function getInterviewersForDay(state, day) {
 }
 
 export function updateSpots(state) {
+// updates the number of spots once an interview is sucessfully booked or canceled
   const currentDay = state.days.find(day => day.name === state.day)
 
   let newSpots = 0

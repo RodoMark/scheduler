@@ -22,7 +22,7 @@ describe("Application", () => {
   
   });
 
-  it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
+  it.only("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
     const { container, debug } = render(<Application/>);
     
     await waitForElement(()=> getByText(container, "Archie Cohen"))
@@ -46,7 +46,8 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
 
-    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
+    await waitForElement(()=> expect(getByText(day, "no spots remaining")).toBeInTheDocument())
+    
   });
 
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {

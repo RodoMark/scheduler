@@ -85,7 +85,9 @@ export default {
 
   put: jest.fn(url => {
     if (url === "/api/days/1") {
-      fixtures.days[0].spots-- 
+      console.log("FIXTURES BEFORE", fixtures.days[0].spots)
+      fixtures.days[0].spots--
+      console.log("FIXTURES AFTER", fixtures.days[0].spots) 
       return Promise.resolve({
         status: 204,
         statusText: "No Content",
@@ -110,7 +112,9 @@ export default {
 
   delete: jest.fn(url => {
     if (url === "/api/days/1") {
+      console.log("FIXTURES BEFORE", fixtures.days[0].spots)
       fixtures.days[0].spots++ 
+      console.log("FIXTURES AFTER", fixtures.days[0].spots)
       return Promise.resolve({
         status: 204,
         statusText: "No Content",

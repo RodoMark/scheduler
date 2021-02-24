@@ -82,7 +82,6 @@ export default function Appointment(props) {
           onDelete={confirm}
           onEdit={edit}
         />
-        
       )}
 
       {mode === CREATE && (
@@ -91,7 +90,6 @@ export default function Appointment(props) {
           onSave={save}
           onCancel={back}
         />
-        
       )}
 
       {mode === EDIT && (
@@ -102,14 +100,12 @@ export default function Appointment(props) {
           onSave={save}
           onCancel={back}
         />
-      
       )}
 
       {mode === SAVING && (
         <Status
           message="SAVING"
         />
-      
       )} 
 
       {mode === CONFIRM && (
@@ -118,14 +114,12 @@ export default function Appointment(props) {
             onConfirm={cancel}
             onDeny={back}
           />
-          
         )} 
 
       {mode === DELETING && (
         <Status
           message="DELETING"
         />
-        
       )} 
 
       {mode === ERROR_SAVE && (
@@ -133,7 +127,6 @@ export default function Appointment(props) {
           message="ERROR WHILE SAVING"
           onClose={back}
         />
-        
       )} 
 
       {mode === ERROR_DELETE && (
@@ -141,8 +134,8 @@ export default function Appointment(props) {
           message="ERROR WHILE DELETING"
           onClose={back}
         />
-        
       )} 
+      
     </article>
     
   )

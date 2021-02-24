@@ -99,12 +99,34 @@ describe("Application", () => {
 
   })
 
-  it("shows the save error when failing to save an appointment", () => {
+  it.only("shows the save error when failing to save an appointment", () => {
     axios.put.mockRejectedValueOnce();
+
+    const { container, debug } = render(<Application />);
+
+    await waitForElement(()=> getByText(container, "Archie Cohen"))
+
+    const appointment = getAllByTestId(container, "appointment")[0]
+
+    fireEvent.click(queryByAltText(appointment, "Add"));
+    expect(getByText(appointment, "Enter")).toBeInTheDocument();
+
+    console.log(prettyDOM(queryByText(appointment, "Confirm")))
+
+    fireEvent.click(queryByText(appointment, "Confirm"));
+    expect(getByText(appointment, 'DELETING')).toBeInTheDocument();
+
+
+    await waitForElement(() => getByText(appointment, 'Error'));
+
+    fireEvent.click(queryByAltText(container, "Close"))
+
+    expect(appointment).toBeInTheDocument();
 
   });
 
-  it.only("shows the delete error when failing to save an appointment", async () => {
+  it("shows the delete error when failing to save an appointment", async () => {
+    axios.delete.mockRejectedValueOnce();
     const { container, debug } = render(<Application />);
 
     await waitForElement(()=> getByText(container, "Archie Cohen"))
@@ -120,9 +142,9 @@ describe("Application", () => {
     expect(getByText(appointment, 'DELETING')).toBeInTheDocument();
 
 
-    await axios.delete.mockRejectedValueOnce();
+    await waitForElement(() => getByText(appointment, 'Error'));
 
-    fireEvent.click(queryByAltText(appointment, "Close"))
+    fireEvent.click(queryByAltText(container, "Close"))
 
     expect(appointment).toBeInTheDocument();
     

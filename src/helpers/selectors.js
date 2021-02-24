@@ -55,3 +55,19 @@ export function getInterviewersForDay(state, day) {
     
     return []
   }
+
+  export function updateSpots(state) {
+    console.log("STATE PASSED INTO UPDATE SPOTS", state)
+    const currentDay = state.days.find(day => day.name === state.day)
+
+  let newSpots = 0
+
+  for(const appointmentId of currentDay.appointments){
+    if(!state.appointments[appointmentId].interview){
+      newSpots++
+      console.log(newSpots)
+    }
+  }
+
+  currentDay.spots = newSpots
+}

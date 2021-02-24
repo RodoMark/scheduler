@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+import { updateSpots } from '../helpers/selectors'
+
 export function useApplicationData(){
 
   const [state, setState] = useState({
@@ -85,22 +87,28 @@ export function useApplicationData(){
       ...state.appointments,
       [id]: appointment
     };
- 
-    setState({
-      ...state,
-      appointments
-    });
+
+    setState(prevState => {
+      console.log(prevState)
+      const pendingState = {...prevState, appointments}
+      updateSpots(pendingState)
+      return pendingState
+    })
+
+    
     
     return axios.put(`/api/appointments/${id}`, {interview})
-      .then((output)=> {
-        axios.get('/api/days')
-        .then((days) => {
-          setState((prevState) => {
-            return {...prevState, days: days.data}
-          })
-        })
-        return output
-      })
+      // .then((output)=> {
+      //   axios.get('/api/days')
+      //   .then((days) => {
+      //     setState((prevState) => {
+      //       return {...prevState, days: days.data}
+      //     })
+      //   })
+      //   return output
+      // })
+
+      
   }
 
   function cancelInterview(id) 
@@ -114,17 +122,15 @@ export function useApplicationData(){
       ...state.appointments,
       [id]: appointment
     }
+
+    setState(prevState => {
+      const pendingState = {...prevState, appointments}
+      updateSpots(pendingState)
+      return pendingState
+    })
     
     return axios.delete(`/api/appointments/${id}`)
-    .then((output)=> {
-      axios.get('/api/days')
-      .then((days) => {
-        setState((prevState) => {
-          return {...prevState, days: days.data}
-        })
-      })
-      return output
-    })
+   
     
   }
 

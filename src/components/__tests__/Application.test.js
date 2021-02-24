@@ -46,7 +46,7 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
 
-    // waitForElement(()=> expect(getByText(day, "no spots remaining")).toBeInTheDocument())
+    waitForElement(()=> expect(getByText(day, "no spots remaining")).toBeInTheDocument())
     
   });
 
@@ -69,7 +69,7 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
 
-    // expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
+    expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
 
   });
 
@@ -83,29 +83,25 @@ describe("Application", () => {
 
     fireEvent.click(getByAltText(appointment, "Edit"));
 
-    fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
+    await waitForElement(() => getByPlaceholderText(container, "Enter Student Name"))
+
+    fireEvent.change(getByPlaceholderText(container, "Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" }
       });
 
-    fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
+    fireEvent.click(getByAltText(container, "Tori Malcolm"));
 
-    // fireEvent.click(getByText(appointment, "Save"));
-    // expect(getByText(appointment, 'SAVING')).toBeInTheDocument();
 
-    // await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
+    fireEvent.click(getByText(container, "Save"));
+    expect(getByText(container, 'SAVING')).toBeInTheDocument();
+
+    await waitForElement(() => queryByText(container, "Lydia Miller-Jones"));
   
+  const day = getAllByTestId(container, "day").find(day =>
+    queryByText(day, "Monday")
+  );
 
-    // console.log(prettyDOM(appointment))
-
-  // fireEvent.click(getByText(appointment, "Save"));
-
-  // expect(getByText(appointment, "SAVING")).toBeInTheDocument();
-
-  // const day = getAllByTestId(container, "day").find(day =>
-  //   queryByText(day, "Monday")
-  // );
-
-  // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
 
 
   })
@@ -118,8 +114,6 @@ describe("Application", () => {
     await waitForElement(()=> getByText(container, "Archie Cohen"))
 
     const appointment = getAllByTestId(container, "appointment")[0]
-
-    // console.log(prettyDOM(appointment))
 
     fireEvent.click(queryByAltText(appointment, "Add"));
     expect(getByPlaceholderText(appointment, "Enter Student Name")).toBeInTheDocument();

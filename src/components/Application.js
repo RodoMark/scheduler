@@ -35,7 +35,6 @@ const schedule = appointments.map((appointment) => {
       interview={interview}
       interviewers={interviewers}
       bookInterview={bookInterview}
-      bookInterview={bookInterview}
       cancelInterview={cancelInterview}
     />
   );

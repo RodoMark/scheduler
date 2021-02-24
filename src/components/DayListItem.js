@@ -18,14 +18,14 @@ export default function DayListItem(props) {
     "day-list__item--full": props.spots === 0
  })
 
-// console.log(props)
-
   return (
     <li data-testid = "day" onClick={props.setDay}>
-      <h2 className="text--regular">{props.name}</h2>
-      <h3 
-      className={dayClass}
-      >{formatSpots(props.spots)}</h3>
+      <h2 className="text--regular">
+        {props.name}
+      </h2>
+      <h3 className={dayClass}>
+        {formatSpots(props.spots)}
+      </h3>
     </li>
   )
 }

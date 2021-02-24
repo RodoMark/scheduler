@@ -31,44 +31,44 @@ export default function Form(props) {
 
   return (
     <main className="appointment__card appointment__card--create">
-  <section className="appointment__card-left">
-    <form autoComplete="off">
-      <input
-        value={name}
-        onChange={(event) => setName(event.target.value)}
-        className="appointment__create-input text--semi-bold"
-        name="name"
-        type="text"
-        placeholder="Enter Student Name"
-        data-testid = "student-name-input" 
-        
-      />
-    </form>
+      <section className="appointment__card-left">
+        <form autoComplete="off">
+          <input
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            className="appointment__create-input text--semi-bold"
+            name="name"
+            type="text"
+            placeholder="Enter Student Name"
+            data-testid = "student-name-input" 
+            
+          />
+        </form>
 
-    <section className="appointment__validation">{error}</section>
+        <section className="appointment__validation">{error}</section>
 
-    <InterviewerList 
-      // interviewers={props.interviewers} 
-      interviewers={props.interviewers}
-      interviewer={interviewer} 
-      setInterviewer={setInterviewerVal}
-      onChange={props.onChange}
-    />
-  </section>
-  <section className="appointment__card-right">
-    <section className="appointment__actions">
-      <Button 
-        danger
-        onClick={cancel}>
-          Cancel
-      </Button>
-      <Button 
-        confirm
-        onClick={validate}>
-          Save
-      </Button>
-    </section>
-  </section>
-</main>
+        <InterviewerList 
+          // interviewers={props.interviewers} 
+          interviewers={props.interviewers}
+          interviewer={interviewer} 
+          setInterviewer={setInterviewerVal}
+          onChange={props.onChange}
+        />
+      </section>
+      <section className="appointment__card-right">
+        <section className="appointment__actions">
+          <Button 
+            danger
+            onClick={cancel}>
+              Cancel
+          </Button>
+          <Button 
+            confirm
+            onClick={validate}>
+              Save
+          </Button>
+        </section>
+      </section>
+    </main>
   )
 }

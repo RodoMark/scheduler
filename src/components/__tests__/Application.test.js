@@ -146,8 +146,6 @@ describe("Application", () => {
     fireEvent.click(queryByAltText(appointment, "Delete"));
     expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
 
-    console.log(prettyDOM(queryByText(appointment, "Confirm")))
-
     fireEvent.click(queryByText(appointment, "Confirm"));
     expect(getByText(appointment, 'DELETING')).toBeInTheDocument();
 

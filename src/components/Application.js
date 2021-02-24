@@ -51,10 +51,9 @@ const schedule = appointments.map((appointment) => {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList
-        days={state.days}
-        day={state.day}
-        setDay={setDay}
-       
+          days={state.days}
+          day={state.day}
+          setDay={setDay}
         />
         </nav>
         <img

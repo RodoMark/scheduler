@@ -49,15 +49,15 @@ export function getInterviewersForDay(state, day) {
          return interviewersArr.map(int => {
             return interviewers[int]
           }
-         )        
-       }
+        )        
+      }
     }
     
     return []
-  }
+}
 
-  export function updateSpots(state) {
-    const currentDay = state.days.find(day => day.name === state.day)
+export function updateSpots(state) {
+  const currentDay = state.days.find(day => day.name === state.day)
 
   let newSpots = 0
 

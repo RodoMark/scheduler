@@ -25,7 +25,8 @@ export function useApplicationData(){
   axios.get('/api/days')
     .then((output) => {
       return output.data
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.log("ERROR:", error)
     })
 

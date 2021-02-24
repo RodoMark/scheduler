@@ -73,8 +73,6 @@ export function useApplicationData(){
 
 
     function bookInterview(id, interview) {
-    // console.log(id, interview)
-    // console.log("HERE IS BOOK")
 
     const appointment = {
       ...state.appointments[id],

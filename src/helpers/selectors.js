@@ -55,3 +55,24 @@ export function getInterviewersForDay(state, day) {
     
     return []
   }
+
+  export function getSpotsForDay(state, day) {
+
+    //... returns an array of interviews for that day
+    // Immutable patterns
+      const days = [...state.days]
+
+      let dayObj = {}
+
+      for(const dayObjTmp in days) {
+        if (dayObjTmp.name === day) {
+          dayObj = days[dayObjTmp-1]
+        }
+      }
+      
+      const id = dayObj.id
+    
+      days[id-1] = dayObj
+
+      return days
+    }

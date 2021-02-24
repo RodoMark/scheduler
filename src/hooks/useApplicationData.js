@@ -16,9 +16,6 @@ export function useApplicationData(){
 
   const setDay = day => {setState({...state, day: day})}
 
-
-
-
   const getDays = 
   axios.get('/api/days')
     .then((output) => {
@@ -70,11 +67,7 @@ export function useApplicationData(){
     
   }, [])
 
-
-
     function bookInterview(id, interview) {
-    // console.log(id, interview)
-    // console.log("HERE IS BOOK")
 
     const appointment = {
       ...state.appointments[id],
@@ -90,7 +83,7 @@ export function useApplicationData(){
       ...state,
       appointments
     });
-    
+
     return axios.put(`/api/appointments/${id}`, {interview})
       .then((output)=> {
         axios.get('/api/days')

@@ -48,7 +48,17 @@ export function useApplicationData(){
 
   useEffect(() => {
 
-    const webSocket = new WebSocket('ws://localhost:8001');
+    const ws = new WebSocket('ws://localhost:8001');
+
+    ws.onopen = function (event) {
+      ws.send("Ping1");
+    };
+
+    ws.onmessage = function (event) {
+      console.log(event.data);
+    }
+
+    
 
     Promise.all([
       getDays, 

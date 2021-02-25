@@ -2,8 +2,8 @@
 
 ## About
 
-A single page application (SPA) called built using React. This project demonstrates my competency with:
- 
+A single page application (SPA) built using React. This project demonstrates my competency with:
+
 * Front-end: React, Storybook
 * Back-end: Webpack, Babel, Axios, Webpack Dev Server
 * Testing: Jest, Testing Library, Cypress

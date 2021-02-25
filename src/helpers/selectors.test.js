@@ -83,8 +83,6 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-// getInterviewersForDay
-
 test("getInterviewersForDay returns an array", () => {
   const result = getInterviewersForDay(state, "Monday");
   expect(Array.isArray(result)).toBe(true);
@@ -111,8 +109,6 @@ test("getInterviewersForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-
-// getInterview
 test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
   expect(result).toEqual(
@@ -178,7 +174,7 @@ test("useVisualMode should replace the current mode", () => {
   act(() => result.current.transition(SECOND));
   expect(result.current.mode).toBe(SECOND);
 
-  // Passing "true" to transition(THIRD, true) says "Transition to THIRD by REPLACING SECOND"
+  // Passing "true" to transition(THIRD, true) says "Transition to THIRD by replacing SECOND"
   act(() => result.current.transition(THIRD, true));
   expect(result.current.mode).toBe(THIRD);
 

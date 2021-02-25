@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from "react";
-import axios from 'axios'
+import React from "react";
 
 import "components/Application.scss";
 import DayList from "./DayList"
@@ -35,7 +34,6 @@ const schedule = appointments.map((appointment) => {
       interview={interview}
       interviewers={interviewers}
       bookInterview={bookInterview}
-      bookInterview={bookInterview}
       cancelInterview={cancelInterview}
     />
   );
@@ -52,10 +50,9 @@ const schedule = appointments.map((appointment) => {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList
-        days={state.days}
-        day={state.day}
-        setDay={setDay}
-       
+          days={state.days}
+          day={state.day}
+          setDay={setDay}
         />
         </nav>
         <img

@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
+import { updateSpots } from '../helpers/selectors'
+
 export function useApplicationData(){
 
   const [state, setState] = useState({
@@ -20,7 +22,8 @@ export function useApplicationData(){
   axios.get('/api/days')
     .then((output) => {
       return output.data
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.log("ERROR:", error)
     })
 
@@ -44,6 +47,9 @@ export function useApplicationData(){
     })
 
   useEffect(() => {
+
+    const webSocket = new WebSocket('ws://localhost:8001');
+
     Promise.all([
       getDays, 
       getAppointments,
@@ -78,22 +84,16 @@ export function useApplicationData(){
       ...state.appointments,
       [id]: appointment
     };
- 
-    setState({
-      ...state,
-      appointments
-    });
 
-    return axios.put(`/api/appointments/${id}`, {interview})
-      .then((output)=> {
-        axios.get('/api/days')
-        .then((days) => {
-          setState((prevState) => {
-            return {...prevState, days: days.data}
-          })
-        })
-        return output
-      })
+    setState(prevState => {
+      const pendingState = {...prevState, appointments}
+      updateSpots(pendingState)
+      return pendingState
+    })
+
+    
+    
+    return axios.put(`/api/appointments/${id}`, {interview})      
   }
 
   function cancelInterview(id) 
@@ -107,17 +107,15 @@ export function useApplicationData(){
       ...state.appointments,
       [id]: appointment
     }
+
+    setState(prevState => {
+      const pendingState = {...prevState, appointments}
+      updateSpots(pendingState)
+      return pendingState
+    })
     
     return axios.delete(`/api/appointments/${id}`)
-    .then((output)=> {
-      axios.get('/api/days')
-      .then((days) => {
-        setState((prevState) => {
-          return {...prevState, days: days.data}
-        })
-      })
-      return output
-    })
+   
     
   }
 

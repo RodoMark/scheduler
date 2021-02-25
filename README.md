@@ -1,5 +1,17 @@
 # Interview Scheduler
 
+## About
+
+A single page application (SPA) called built using React. This project demonstrates my competency with:
+ 
+* Front-end: React, Storybook
+* Back-end: Webpack, Babel, Axios, Webpack Dev Server
+* Testing: Jest, Testing Library, Cypress
+
+The user can book an interview in an empty appointment slot and switch between days by clicking on them.
+
+Interviews are booked by typing in a student name and clicking on an interviewer from a list of available interviewers. The number of spots available for each day updates as spots are filled up.
+
 ## Setup
 
 Install dependencies with `npm install`.
